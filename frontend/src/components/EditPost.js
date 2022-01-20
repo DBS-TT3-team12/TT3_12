@@ -7,9 +7,8 @@ import { editPost } from "./api";
 const { Header, Content, Footer } = Layout;
 
 function EditPost({ post }) {
-  // console.log(post)
-  const fields = [post];
   const auth = useAuthState();
+  const fields = {title: post.Post_Title, desc: post.Post_Description, image: post.Post_image}
   const navigate = useNavigate();
   const onFinish = (values) => {
     editPost(auth.token, { ...values, postId: post.Post_ID }).then((result) => {
@@ -40,7 +39,7 @@ function EditPost({ post }) {
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          initialValues={post}
+          initialValues={fields}
           onFinish={onFinish}
         >
           <Form.Item name="title" rules={[{ required: true, message: "Please give a title!" }]}>
