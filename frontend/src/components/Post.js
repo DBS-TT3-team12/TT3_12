@@ -9,9 +9,8 @@ const { Meta } = Card;
 
 const Post = ({ post, handleLike, handleComment, handleEdit, handleDelete }) => {
   return (
-    <div style={{ padding: 20 }}>
+    <div style={{ padding: 20, display: "flex", justifyContent: "center" }}>
       <Row gutter={[8, 48]}>
-        <Col span={8}></Col>
         <Col span={8}>
           <Card
             hoverable
@@ -29,7 +28,6 @@ const Post = ({ post, handleLike, handleComment, handleEdit, handleDelete }) => 
             <Meta title={post.Post_Title} description={post.Post_Description} />
           </Card>
         </Col>
-        <Col span={8}></Col>
       </Row>
     </div>
   )
