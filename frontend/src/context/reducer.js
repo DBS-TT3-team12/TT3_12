@@ -4,42 +4,48 @@ let user = localStorage.getItem("currentUser")
 let token = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).auth_token
   : "";
- 
+
 export const initialState = {
-  userDetails: "" || user,
-  token: "" || token,
+  user: user,
+  token: token,
   loading: false,
-  errorMessage: null
+  errorMessage: null,
 };
- 
+
 export const AuthReducer = (initialState, action) => {
   switch (action.type) {
+    case "RESET_FORM":
+      return {
+        ...initialState,
+        errorMessage: null,
+      };
     case "REQUEST_LOGIN":
       return {
         ...initialState,
-        loading: true
+        loading: true,
+        errorMessage: null,
       };
     case "LOGIN_SUCCESS":
       return {
         ...initialState,
         user: action.payload.user,
         token: action.payload.auth_token,
-        loading: false
+        loading: false,
       };
     case "LOGOUT":
       return {
         ...initialState,
         user: "",
-        token: ""
+        token: "",
       };
- 
+
     case "LOGIN_ERROR":
       return {
         ...initialState,
         loading: false,
-        errorMessage: action.error
+        errorMessage: action.error,
       };
- 
+
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
