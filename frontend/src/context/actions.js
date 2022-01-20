@@ -1,24 +1,31 @@
-// const ROOT_URL = "https://secret-hamlet-03431.herokuapp.com";
+import axios from "axios";
 
-// export async function loginUser(dispatch, loginPayload) {
+const ROOT_URL = "http://127.0.0.1:5000";
+
+// working
+// export async function loginUser(dispatch, data) {
 //   const requestOptions = {
 //     method: "POST",
 //     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(loginPayload),
+//     body: JSON.stringify(data),
 //   };
 
 //   try {
 //     dispatch({ type: "REQUEST_LOGIN" });
 //     let response = await fetch(`${ROOT_URL}/login`, requestOptions);
-//     let data = await response.json();
+//     let res = await response.json();
 
-//     if (data.user) {
-//       dispatch({ type: "LOGIN_SUCCESS", payload: data });
-//       localStorage.setItem("currentUser", JSON.stringify(data));
-//       return data;
+//     if (res.access_token) {
+//       const payload = { user: data.user, token: res.access_token };
+//       dispatch({
+//         type: "LOGIN_SUCCESS",
+//         payload,
+//       });
+//       localStorage.setItem("currentUser", JSON.stringify(payload));
+//       return payload;
 //     }
 
-//     dispatch({ type: "LOGIN_ERROR", error: data.errors[0] });
+//     dispatch({ type: "LOGIN_ERROR", error: res.msg });
 //     return;
 //   } catch (error) {
 //     dispatch({ type: "LOGIN_ERROR", error: error });
