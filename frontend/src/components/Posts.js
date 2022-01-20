@@ -124,11 +124,17 @@ const tempPosts = [
   }
 ]
 
-const Posts = () => {
+const Posts = ({ handleLike, handleComment, handleEdit, handleDelete }) => {
   return (
-    <div style={{backgroundColor: '#DCDCDC'}}>
+    <div style={{ backgroundColor: '#DCDCDC' }}>
       {tempPosts.map((post, index) => (
-        <Post key={index} post={post} />
+        <Post
+          key={index}
+          post={post}
+          handleLike={handleLike}
+          handleComment={handleComment}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete} />
       ))}
     </div>
   )
