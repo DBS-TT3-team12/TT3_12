@@ -7,7 +7,6 @@ export async function viewAllPosts(token) {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
   };
 
   try {
