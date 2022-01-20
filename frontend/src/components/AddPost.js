@@ -1,59 +1,47 @@
 import { useState } from "react";
+import { Form, Button, Input } from "antd";
 
 function AddPost() {
-  const [newPost, setNewPost] = useState("");
-  // const [newPostDesc, setNewPostDesc] = useState("");
-  // const [newBudget, setNewBudget] = useState("");
-
-  let navigate = useNavigate();
-
-  const goBack = () => {
-    navigate("/projects");
-  };
-
-  const addNewProject = () => {
-    console.log("Added new project");
-    navigate("/projects");
-  };
+  const onFinish = (values) => {
+    console.log('Success:', values)
+  }
 
   return (
-    <div className="container">
-      <div className="header">
-        <h1>Add new project:</h1>
-        <div>
-          <Button color="green" text="Add" onClick={addNewProject} />
-          <Button color="red" text="Back" onClick={goBack} />
-        </div>
-      </div>
-      <form className="add-form">
-        <div className="form-control">
-          <label>Name of Project</label>
-          <input
-            type="text"
-            placeholder="Input expense name"
-            value={newProjectName}
-            onChange={(e) => setNewProjectName(e.target.value)}
-          />
-        </div>
-        <div className="form-control">
-          <label>Description</label>
-          <input
-            type="text"
-            placeholder="Input new description"
-            value={newProjectDesc}
-            onChange={(e) => setNewProjectDesc(e.target.value)}
-          />
-        </div>
-        <div className="form-control">
-          <label>Budget</label>
-          <input
-            type="text"
-            placeholder="Input new budget"
-            value={newBudget}
-            onChange={(e) => setNewBudget(e.target.value)}
-          />
-        </div>
-      </form>
+    <div>
+      <h2>Add new post:</h2>
+      <Form
+        name="basic"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        onFinish={onFinish}
+      >
+        <Form.Item
+          name="title"
+          rules={[{ required: true, message: 'Please give a title!' }]}
+        >
+          <Input placeholder="Title" />
+        </Form.Item>
+        <Form.Item
+          name="description"
+          rules={[{ required: true, message: 'Please write a short description!' }]}
+        >
+          <Input.TextArea rows={4} placeholder="Write a caption..." />
+        </Form.Item>
+        <Form.Item
+          name="imageLink"
+        >
+          <Input placeholder="image hyperlink" />
+        </Form.Item>
+        <Form.Item
+          wrapperCol={{
+            span: 16
+          }}
+        >
+          <Button type="primary" htmlType="submit">
+            Post
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }
