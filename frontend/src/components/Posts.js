@@ -164,7 +164,7 @@ const Posts = ({ handleLike, handleComment, handleEdit, handleDelete, filterByUs
 
   return (
     <div style={{ backgroundColor: "#DCDCDC", display: "flex", flexDirection: "column" }}>
-      {posts.reverse.map((post, index) => (
+      {posts.reverse().map((post, index) => (
         <Post
           style
           key={index}
