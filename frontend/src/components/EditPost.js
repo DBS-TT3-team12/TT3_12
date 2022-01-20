@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const { Header, Content, Footer } = Layout;
 
-const post = { title: 'Test', desc: '12345', image: 'abc.test' }
-console.log(post)
-
 function EditPost({post}) {
   console.log(post)
+  const fields = [post]
   const navigate = useNavigate();
   const onFinish = (values) => {
     console.log('Success:', values)
@@ -33,25 +31,25 @@ function EditPost({post}) {
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          fields={post}
+          initialValues={post}
           onFinish={onFinish}
         >
           <Form.Item
             name="title"
             rules={[{ required: true, message: 'Please give a title!' }]}
           >
-            <Input placeholder="Title" defaultValue={post.title} />
+            <Input placeholder="Title" />
           </Form.Item>
           <Form.Item
             name="desc"
             rules={[{ required: true, message: 'Please write a short description!' }]}
           >
-            <Input.TextArea rows={4} placeholder="Write a caption..." defaultValue={post.desc} />
+            <Input.TextArea rows={4} placeholder="Write a caption..." />
           </Form.Item>
           <Form.Item
             name="image"
           >
-            <Input placeholder="image hyperlink" defaultValue={post.image} />
+            <Input placeholder="image hyperlink" />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
