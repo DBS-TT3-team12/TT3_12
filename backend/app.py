@@ -34,7 +34,7 @@ def logout():
     response = jsonify({"msg": "User logged out"})
     unset_jwt_cookies(response)
     return response
-
+#done left pagination
 #This is to get all the posts
 @app.route('/allPost', methods = ["GET"])
 @jwt_required()
@@ -42,13 +42,13 @@ def getAllPost():
     #Check if method signature is 'GET'
     if request.method == 'GET':
         all_post = models.Post.query.all()
-        cols = ['Post_Title', 'Post_Description', 'Post_Image']
+        cols = ['Post_ID','Post_Title', 'Post_Description', 'Post_Image']
         result = [{col: getattr(d, col) for col in cols} for d in all_post]
         
 
     return jsonify(result=result)
             
-   
+#done 
 #This is to insert new post entry
 @app.route('/addPost', methods = ["POST"])
 @jwt_required()
@@ -56,7 +56,9 @@ def addPost():
     #Check if method signature is 'POST'
     if request.method == 'POST':
         post = request.json
-        newPost = models.Post(post['title'],post['desc'],post['image'])
+        
+        newPost = models.Post(Post_Title = post['title'],Post_Description = post['desc'], Post_Image = post['image'])
+        
         db.session.add(newPost)
         db.session.commit()
         
@@ -75,6 +77,7 @@ def editPost():
         if post_exists is None:
             return {"status": "fail",  "errorMsg": "Post Not existed"}
         else:
+            post_exists.Post_ID = post['postId']
             post_exists.Post_Title = post['title']
             post_exists.Post_Description = post['desc']
             post_exists.Post_Image = post['image']
