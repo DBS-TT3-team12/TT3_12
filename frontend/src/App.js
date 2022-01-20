@@ -1,10 +1,12 @@
 import logo from "./logo.svg";
-import "./App.css";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Login from "./components/login";
 import { AuthProvider, useAuthDispatch, useAuthState } from "./context/context";
 import { Layout, Button, Breadcrumb } from "antd";
 import { logout } from "./context/actions";
+
+import "antd/dist/antd.css";
+import "./App.css";
 
 const { Header, Content, Footer } = Layout;
 
@@ -26,8 +28,9 @@ function Home() {
 
   return (
     <Layout className="layout">
-      <Header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <h1>Tweeter</h1>  
+      <Header>
+        <h1>Tweeter</h1>
+        {auth.user && <h2>You are logged in as {auth.user}.</h2>}
         {!auth.user ? (
           <Button type="primary" onClick={() => navigate("./login")}>
             Login
@@ -61,7 +64,7 @@ function Home() {
           </header>
         </div>
       </Content>
-      <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
+      {/* <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer> */}
     </Layout>
   );
 }

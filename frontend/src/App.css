@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.ant-layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ant-layout-header h1 {
+  font-family: monospace;
+  color: white;
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.ant-layout-header h2 {
+  font-family: monospace;
+  color: white;
+  font-size: 12px;
+  margin-bottom: 0;
+}
