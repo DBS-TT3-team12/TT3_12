@@ -5,9 +5,14 @@ import { AuthProvider, useAuthDispatch, useAuthState } from "./context/context";
 import { Layout, Button, Breadcrumb } from "antd";
 import { logout } from "./context/actions";
 import Posts from "./components/Posts.js"
+import AddPost from "./components/AddPost"
+import EditPost from "./components/EditPost"
 
 import "antd/dist/antd.css";
 import "./App.css";
+
+// Temporary for testing purposes
+const post = { title: 'Test', desc: '12345', image: 'abc.test' }
 
 const { Header, Content, Footer } = Layout;
 
@@ -17,6 +22,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/addpost" element={<AddPost />} />
+        {/*Temporary for testing purposes*/}
+        <Route path="/editpost" element={<EditPost post={post} />} />
       </Routes>
     </AuthProvider>
   );
@@ -37,14 +45,19 @@ function Home() {
             Login
           </Button>
         ) : (
-          <Button
-            onClick={() => {
-              logout(dispatch);
-              navigate("/");
-            }}
-          >
-            Logout
-          </Button>
+          <div>
+            <Button
+              onClick={() => {
+                logout(dispatch);
+                navigate("/");
+              }}
+            >
+              Logout
+            </Button>
+            <Button type="primary" onClick={() => navigate("./addPost") } style={{ marginLeft: "4px" }}>
+              Upload
+            </Button>
+          </div>
         )}
       </Header>
       {auth.user ? <Posts /> :
