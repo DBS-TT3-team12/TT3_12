@@ -6,7 +6,7 @@ const { Header, Content, Footer } = Layout;
 
 function EditPost({post}) {
   console.log(post)
-  const fields = [post]
+  const fields = {title: post.Post_Title, desc: post.Post_Description, image: post.Post_image}
   const navigate = useNavigate();
   const onFinish = (values) => {
     console.log('Success:', values)
@@ -31,7 +31,7 @@ function EditPost({post}) {
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          initialValues={post}
+          initialValues={fields}
           onFinish={onFinish}
         >
           <Form.Item

@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import { useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Login from "./components/login";
 import { AuthProvider, useAuthDispatch, useAuthState } from "./context/context";
@@ -11,29 +12,36 @@ import EditPost from "./components/EditPost"
 import "antd/dist/antd.css";
 import "./App.css";
 
-// Temporary for testing purposes
-const post = { title: 'Test', desc: '12345', image: 'abc.test' }
-
 const { Header, Content, Footer } = Layout;
 
+const postDefault = { title: 'Test', desc: 'abcdef', image: 'abc.123' }
+
 function App() {
+  const [post, setPost] = useState({})
+
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home setPost={setPost} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/addpost" element={<AddPost />} />
-        {/*Temporary for testing purposes*/}
-        <Route path="/editpost" element={<EditPost post={post} />} />
+        <Route path="/editpost" element={<EditPost post={post ? post : postDefault} />} />
       </Routes>
     </AuthProvider>
   );
 }
 
-function Home() {
+function Home({setPost}) {
   const auth = useAuthState();
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
+
+  
+
+  function handleEdit(postObject) {
+    setPost(postObject)
+    navigate("./editpost")
+  }
 
   return (
     <Layout className="layout">
@@ -60,7 +68,7 @@ function Home() {
           </div>
         )}
       </Header>
-      {auth.user ? <Posts /> :
+      {auth.user ? <Posts handleEdit={handleEdit} /> :
         <Content style={{ padding: "0 50px" }}>
           <div className="App">
             <header className="App-header">
