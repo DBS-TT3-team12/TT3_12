@@ -1,7 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/login";
 
 function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
+  );
+}
+
+function Home() {
   return (
     <div className="App">
       <header className="App-header">
