@@ -141,7 +141,7 @@ const tempPosts = [
   },
 ];
 
-const Posts = () => {
+const Posts = ({ handleLike, handleComment, handleEdit, handleDelete }) => {
   const auth = useAuthState();
   console.log(auth);
   const [posts, setPosts] = useState([]);
@@ -157,7 +157,15 @@ const Posts = () => {
   return (
     <div style={{ backgroundColor: "#DCDCDC", display: "flex", flexDirection: "column" }}>
       {posts.map((post, index) => (
-        <Post style key={index} post={{ ...post, Post_image: post.Post_Image }} />
+        <Post
+          style
+          key={index}
+          post={{ ...post, Post_image: post.Post_Image }}
+          handleLike={handleLike}
+          handleComment={handleComment}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
       ))}
     </div>
   );

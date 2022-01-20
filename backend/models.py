@@ -21,6 +21,7 @@ class Post(db.Model):
     Post_Image = db.Column(db.String(10000), nullable = False)
     post_comment = db.relationship("POST_COMMENT", backref = "post")
     liked_post = db.relationship("LIKED_POST", backref = "post")
+    User_ID = db.Column(db.Integer, nullable = False, default=1)
 
 # POST_COMMENT TABLE
 class POST_COMMENT(db.Model):
