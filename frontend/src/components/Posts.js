@@ -1,6 +1,5 @@
 import React from 'react'
 import Post from './Post.js'
-import { Row } from 'antd'
 
 const tempPosts = [
   {
@@ -127,12 +126,10 @@ const tempPosts = [
 
 const Posts = () => {
   return (
-    <div>
-      <Row gutter={[16, 16]}>
-        {tempPosts.map((post, index) => (
-          <Post key={index} post={post} />
-        ))}
-      </Row>
+    <div style={{backgroundColor: '#DCDCDC'}}>
+      {tempPosts.map((post, index) => (
+        <Post key={index} post={post} />
+      ))}
     </div>
   )
 }
