@@ -24,6 +24,30 @@ export async function viewAllPosts(token) {
   }
 }
 
+export async function viewUserPosts(token) {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    let response = await fetch(`${ROOT_URL}/userPost?filterByUser=true`, requestOptions);
+
+    if (response.ok) {
+      const result = await response.json();
+      return result.result;
+    }
+
+    return false;
+  } catch (error) {
+    console.error("Error: allPost");
+    return false;
+  }
+}
+
 export async function addPost(token, data) {
   const requestOptions = {
     method: "POST",

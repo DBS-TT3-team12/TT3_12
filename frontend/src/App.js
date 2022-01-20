@@ -36,7 +36,7 @@ function Home({setPost}) {
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
-  
+  const [filterByUser, setFilterByUser] = useState(false);
 
   function handleEdit(postObject) {
     setPost(postObject)
@@ -65,10 +65,16 @@ function Home({setPost}) {
             <Button type="primary" onClick={() => navigate("./addPost") } style={{ marginLeft: "4px" }}>
               Upload
             </Button>
+            <Button type="primary" onClick={() => setFilterByUser(true) } style={{ marginLeft: "4px" }}>
+              My Posts
+            </Button>
+            <Button type="primary" onClick={() => setFilterByUser(false) } style={{ marginLeft: "4px" }}>
+              All Posts
+            </Button>
           </div>
         )}
       </Header>
-      {auth.user ? <Posts handleEdit={handleEdit} /> :
+      {auth.user ? <Posts filterByUser={filterByUser} handleEdit={handleEdit} /> :
         <Content style={{ padding: "0 50px" }}>
           <div className="App">
             <header className="App-header">

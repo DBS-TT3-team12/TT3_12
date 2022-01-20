@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "../context/context.js";
-import { viewAllPosts } from "./api.js";
+import { viewAllPosts, viewUserPosts } from "./api.js";
 import Post from "./Post.js";
 
 const tempPosts = [
@@ -141,18 +141,26 @@ const tempPosts = [
   },
 ];
 
-const Posts = ({ handleLike, handleComment, handleEdit, handleDelete }) => {
+const Posts = ({ handleLike, handleComment, handleEdit, handleDelete, filterByUser }) => {
   const auth = useAuthState();
   console.log(auth);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    viewAllPosts(auth.token).then((res) => {
-      if (res) {
-        setPosts(res);
-      }
-    });
-  }, []);
+    if (filterByUser) {
+      viewUserPosts(auth.token).then((res) => {
+        if (res) {
+          setPosts(res);
+        }
+      });
+    } else {
+      viewAllPosts(auth.token).then((res) => {
+        if (res) {
+          setPosts(res);
+        }
+      });
+    }
+  }, [filterByUser]);
 
   return (
     <div style={{ backgroundColor: "#DCDCDC", display: "flex", flexDirection: "column" }}>
