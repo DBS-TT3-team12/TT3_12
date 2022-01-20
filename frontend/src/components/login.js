@@ -56,6 +56,9 @@ function Login() {
           <button onClick={handleLogin} disabled={loading}>
             login
           </button>
+          <button onClick={() => navigate("/")} style={{ marginLeft: "4px" }}>
+            back
+          </button>
         </form>
       </div>
     </div>
