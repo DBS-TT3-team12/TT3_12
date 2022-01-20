@@ -52,10 +52,13 @@ def getAllPost():
     #Check if method signature is 'GET'
     if request.method == 'GET':
         all_post = models.Post.query.all()
+        cols = ['Post_Title', 'Post_Description', 'Post_Image']
+        result = [{col: getattr(d, col) for col in cols} for d in all_post]
         
-        #return all_post
-        return all_post
-    
+
+    return jsonify(result=result)
+            
+   
 #This is to get all the posts
 @app.route('/addPost', methods = ["POST"])
 def addPost():
