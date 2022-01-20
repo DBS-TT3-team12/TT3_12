@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "../context/context.js";
-import { viewAllPosts, viewUserPosts } from "./api.js";
+import { deletePost, viewAllPosts, viewUserPosts } from "./api.js";
 import Post from "./Post.js";
 
 const tempPosts = [
@@ -143,8 +143,18 @@ const tempPosts = [
 
 const Posts = ({ handleLike, handleComment, handleEdit, handleDelete, filterByUser }) => {
   const auth = useAuthState();
-  console.log(auth);
+  // console.log(auth);
   const [posts, setPosts] = useState([]);
+
+  function deletePost1(post) {
+    deletePost(auth.token, { postId: post.Post_ID }).then((result) => {
+      if (result) {
+        setPosts((posts) => posts.filter((p) => post.Post_ID !== p.Post_ID));
+      } else {
+        console.error("Error: addPost");
+      }
+    });
+  }
 
   useEffect(() => {
     if (filterByUser) {
@@ -172,7 +182,7 @@ const Posts = ({ handleLike, handleComment, handleEdit, handleDelete, filterByUs
           handleLike={handleLike}
           handleComment={handleComment}
           handleEdit={handleEdit}
-          handleDelete={handleDelete}
+          handleDelete={() => deletePost1(post)}
         />
       ))}
     </div>

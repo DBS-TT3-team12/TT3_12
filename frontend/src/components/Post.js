@@ -21,7 +21,7 @@ const Post = ({ post, handleLike, handleComment, handleEdit, handleDelete }) => 
               <LikeOutlined key="like" onClick={(e) => { e.stopPropagation(); console.log("Liked!") }} />,
               <CommentOutlined key="comment" onClick={(e) => { e.stopPropagation(); console.log("Add Comment!") }} />,
               <EditOutlined key="edit" onClick={(e) => { e.stopPropagation(); handleEdit(post) }} />,
-              <DeleteOutlined key="delete" onClick={(e) => { e.stopPropagation(); console.log("Delete!") }} />,
+              <DeleteOutlined key="delete" onClick={(e) => { e.stopPropagation(); handleDelete() }} />,
             ]}
             onClick={() => console.log("Clicked card!")}
           >
