@@ -4,6 +4,7 @@ import Login from "./components/login";
 import { AuthProvider, useAuthDispatch, useAuthState } from "./context/context";
 import { Layout, Button, Breadcrumb } from "antd";
 import { logout } from "./context/actions";
+import Posts from "./components/Posts.js"
 
 import "antd/dist/antd.css";
 import "./App.css";
@@ -46,24 +47,26 @@ function Home() {
           </Button>
         )}
       </Header>
-      <Content style={{ padding: "0 50px" }}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
-      </Content>
+      {auth.user ? <Posts /> :
+        <Content style={{ padding: "0 50px" }}>
+          <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <p>
+                Edit <code>src/App.js</code> and save to reload.
+              </p>
+              <a
+                className="App-link"
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn React
+              </a>
+            </header>
+          </div>
+        </Content>
+      }
       {/* <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer> */}
     </Layout>
   );
