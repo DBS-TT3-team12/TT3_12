@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask.json import jsonify, dumps
 
-from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required, JWTManager
+from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required, JWTManager, get_jwt_identity
 
 import models
 
@@ -74,8 +74,8 @@ def addPost():
     #Check if method signature is 'POST'
     if request.method == 'POST':
         post = request.json
-        
-        newPost = models.Post(Post_Title = post['title'],Post_Description = post['desc'], Post_Image = post['image'])
+        curruser_id = get_jwt_identity()
+        newPost = models.Post(Post_Title = post['title'],Post_Description = post['desc'], Post_Image = post['image'], User_ID=curruser_id)
         
         db.session.add(newPost)
         db.session.commit()
