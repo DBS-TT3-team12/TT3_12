@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { Form, Button, Input } from "antd";
 
+import "./AddPost.css";
+
 function AddPost() {
   const onFinish = (values) => {
     console.log('Success:', values)
   }
 
   return (
-    <div>
-      <h2>Add new post:</h2>
+    <div className="container">
+      <div style={{ width: 200 }}>
+        <h2>Add new post:</h2>
+      </div>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -32,11 +36,7 @@ function AddPost() {
         >
           <Input placeholder="image hyperlink" />
         </Form.Item>
-        <Form.Item
-          wrapperCol={{
-            span: 16
-          }}
-        >
+        <Form.Item>
           <Button type="primary" htmlType="submit">
             Post
           </Button>
