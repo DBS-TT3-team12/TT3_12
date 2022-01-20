@@ -2,15 +2,14 @@ from flask import Flask, request
 import models
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-
 from flask.json import jsonify, dumps
 
 from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required, JWTManager
 
 app = Flask(__name__)
-#app.config.from_pyfile('config.py')
+app.config.from_pyfile('config.py')
 app.config["JWT_TOKEN_LOCATION"] = "headers"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///boilerplate.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:Www.62511665@127.0.0.1/socialmedia"
 
 jwt = JWTManager(app)
 CORS(app)
@@ -53,9 +52,13 @@ def getAllPost():
     #Check if method signature is 'GET'
     if request.method == 'GET':
         all_post = models.Post.query.all()
-    
-        return all_post
-    
+        cols = ['Post_Title', 'Post_Description', 'Post_Image']
+        result = [{col: getattr(d, col) for col in cols} for d in all_post]
+        
+
+    return jsonify(result=result)
+            
+   
 #This is to get all the posts
 @app.route('/addPost', methods = ["POST"])
 def addPost():
